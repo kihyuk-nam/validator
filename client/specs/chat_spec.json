@@ -1,0 +1,23 @@
+{
+  "_provenance": {
+    "source": "claude.ai 채팅창 (A-2 방식) — API 키 없이 사람이 프롬프트를 붙여넣고 받은 결과",
+    "prompt": "server/formalizer/prompts/smt.txt 를 그대로 지시문으로 사용 (노트북 A-2 ① (가) 의 Additional rules 는 미포함 — note 필드가 없는 것이 그 근거)",
+    "input": "server/examples/battery_input.json 과 같은 domain / R1~R6 원문",
+    "date": "2026-09-18",
+    "verified": "배포 서버 spec 모드 판정이 server/examples/expected_findings.json 과 완전 일치. trigger/effect 는 canned(battery.smt.json) 와 문자열까지 동일."
+  },
+  "logic": "smt",
+  "variables": {
+    "temp":    {"sort": "Real", "range": [-20, 80], "unit": "°C", "meaning": "배터리 온도 (센서 측정값)"},
+    "current": {"sort": "Real", "range": [0, 50],  "unit": "A",  "meaning": "충전 전류 지령"},
+    "fast":    {"sort": "Bool",                                  "meaning": "급속 충전 모드 활성 (거짓 = 일반 모드)"}
+  },
+  "requirements": [
+    {"id": "R1", "trigger": "(> temp 45)",     "effect": "(<= current 10)"},
+    {"id": "R2", "trigger": "fast",            "effect": "(>= current 30)"},
+    {"id": "R3", "trigger": "(>= temp 50)",    "effect": "fast"},
+    {"id": "R4", "trigger": "true",            "effect": "(<= current 32)"},
+    {"id": "R5", "trigger": "(>= temp 60)",    "effect": "(<= current 20)"},
+    {"id": "R6", "trigger": "(< temp (- 30))", "effect": "fast"}
+  ]
+}
