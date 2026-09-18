@@ -1,0 +1,6 @@
+[
+  {"kind": "conditional_conflict", "req": "R3", "core": ["R1", "R2", "R3"]},
+  {"kind": "conditional_conflict", "req": "R5", "core": ["R2", "R3", "R5"]},
+  {"kind": "vacuous",              "req": "R6", "core": ["DOM", "TRIG_R6"]},
+  {"kind": "redundant",            "req": "R5", "core": ["R1"]}
+]

@@ -1,0 +1,22 @@
+{
+  "logic": "smt",
+  "variables": {
+    "temp":    {"sort": "Real", "range": [-20, 80], "unit": "°C", "meaning": "배터리 온도 (센서 측정값)"},
+    "current": {"sort": "Real", "range": [0, 50],  "unit": "A",  "meaning": "충전 전류 지령"},
+    "fast":    {"sort": "Bool",                                  "meaning": "급속 충전 모드 활성 (거짓 = 일반 모드)"}
+  },
+  "requirements": [
+    {"id": "R1", "trigger": "(> temp 45)",              "effect": "(<= current 10)",
+     "note": "'초과' → 엄격 부등호 >. '이하로 제한' → <=."},
+    {"id": "R2", "trigger": "(= fast true)",            "effect": "(>= current 30)",
+     "note": "'급속 충전 모드에서는' = 모드가 활성인 동안. '30 A 이상 유지' → >=. 일반 모드에 대한 언급은 없으므로 역방향 제약 없음."},
+    {"id": "R3", "trigger": "(>= temp 50)",             "effect": "(= fast true)",
+     "note": "'이상' → >=. '급속 모드로 전환해야 한다'는 동작(전이)이지만 한 시점 상태 논리에서는 '그 조건에서 급속 모드여야 한다'로 읽음. '잔여 충전 시간을 줄이기 위해'는 근거이므로 제약에 넣지 않음."},
+    {"id": "R4", "trigger": "true",                     "effect": "(not (> current 32))",
+     "note": "'어떤 경우에도' → 무조건. '넘어서는 안 된다' → ¬(current > 32), 즉 current <= 32 와 동치."},
+    {"id": "R5", "trigger": "(>= temp 60)",             "effect": "(<= current 20)",
+     "note": "'이상' → >=."},
+    {"id": "R6", "trigger": "(< temp (- 30))",          "effect": "(= fast true)",
+     "note": "'미만' → <. −30 은 도메인(−20~80) 밖이라 trigger 가 거짓일 수밖에 없음을 변환 시점에 인지했으나, 원문에 충실하게 그대로 옮김 — 판정은 검증기의 몫."}
+  ]
+}

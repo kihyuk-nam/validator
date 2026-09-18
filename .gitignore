@@ -1,0 +1,9 @@
+__pycache__/
+*.pyc
+out/
+out_llm/
+.env
+.ipynb_checkpoints/
+
+# Claude Code 에 넘긴 작업 지시서 — 저장소에는 올리지 않는다
+CLAUDE_CODE_PROMPT.md

@@ -1,0 +1,96 @@
+{
+  "input_sha": "59dea8b7df8b5950061ed0232fb8f0cc3c7b324be2f123239225f8dc92ec9749",
+  "logic": "smt",
+  "provenance": {
+    "provider": "canned",
+    "model": "claude (2026-09-11 세션에서 수동 번역; 구현-00 formalize_canned)"
+  },
+  "input": {
+    "domain": "배터리 온도 센서 측정 범위는 −20 °C ~ 80 °C, 충전 전류 지령 범위는 0 A ~ 50 A 이다. 충전 모드는 급속(fast) 또는 일반이다.",
+    "requirements": [
+      {
+        "id": "R1",
+        "text": "배터리 온도가 45 °C를 초과하면 충전 전류를 10 A 이하로 제한해야 한다."
+      },
+      {
+        "id": "R2",
+        "text": "급속 충전 모드에서는 충전 전류를 30 A 이상으로 유지해야 한다."
+      },
+      {
+        "id": "R3",
+        "text": "배터리 온도가 50 °C 이상이면 잔여 충전 시간을 줄이기 위해 급속 충전 모드로 전환해야 한다."
+      },
+      {
+        "id": "R4",
+        "text": "충전 전류는 어떤 경우에도 32 A를 넘어서는 안 된다."
+      },
+      {
+        "id": "R5",
+        "text": "배터리 온도가 60 °C 이상이면 충전 전류를 20 A 이하로 제한해야 한다."
+      },
+      {
+        "id": "R6",
+        "text": "배터리 온도가 −30 °C 미만이면 배터리 예열을 위해 급속 충전 모드로 전환해야 한다."
+      }
+    ]
+  },
+  "spec": {
+    "logic": "smt",
+    "variables": {
+      "temp": {
+        "sort": "Real",
+        "range": [
+          -20,
+          80
+        ],
+        "unit": "°C",
+        "meaning": "배터리 온도"
+      },
+      "current": {
+        "sort": "Real",
+        "range": [
+          0,
+          50
+        ],
+        "unit": "A",
+        "meaning": "충전 전류 지령"
+      },
+      "fast": {
+        "sort": "Bool",
+        "meaning": "급속 충전 모드 활성"
+      }
+    },
+    "requirements": [
+      {
+        "id": "R1",
+        "trigger": "(> temp 45)",
+        "effect": "(<= current 10)"
+      },
+      {
+        "id": "R2",
+        "trigger": "fast",
+        "effect": "(>= current 30)"
+      },
+      {
+        "id": "R3",
+        "trigger": "(>= temp 50)",
+        "effect": "fast"
+      },
+      {
+        "id": "R4",
+        "trigger": "true",
+        "effect": "(<= current 32)"
+      },
+      {
+        "id": "R5",
+        "trigger": "(>= temp 60)",
+        "effect": "(<= current 20)"
+      },
+      {
+        "id": "R6",
+        "trigger": "(< temp (- 30))",
+        "effect": "fast"
+      }
+    ]
+  }
+}

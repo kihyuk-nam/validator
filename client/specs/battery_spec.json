@@ -1,0 +1,16 @@
+{
+  "logic": "smt",
+  "variables": {
+    "temp":    {"sort": "Real", "range": [-20, 80], "unit": "°C"},
+    "current": {"sort": "Real", "range": [0, 50],  "unit": "A"},
+    "fast":    {"sort": "Bool"}
+  },
+  "requirements": [
+    {"id": "R1", "trigger": "(> temp 45)",    "effect": "(<= current 10)"},
+    {"id": "R2", "trigger": "fast",           "effect": "(>= current 30)"},
+    {"id": "R3", "trigger": "(>= temp 50)",   "effect": "fast"},
+    {"id": "R4", "trigger": "true",           "effect": "(<= current 32)"},
+    {"id": "R5", "trigger": "(>= temp 60)",   "effect": "(<= current 20)"},
+    {"id": "R6", "trigger": "(< temp (- 30))","effect": "fast"}
+  ]
+}

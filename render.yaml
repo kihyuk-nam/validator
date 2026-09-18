@@ -1,0 +1,15 @@
+# Render Blueprint — 저장소(validator)를 GitHub 에 올린 뒤 Render 대시보드에서 "New → Blueprint" 로 연결.
+# 서버 코드는 server/ 아래에 있으므로 rootDir 로 지정.  무료 인스턴스: 15분 미사용 시 절전, 월 750시간.
+services:
+  - type: web
+    name: validator
+    runtime: docker
+    plan: free
+    rootDir: server
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /healthz
+    envVars:
+      - key: PORT
+        value: "7860"
+      # - key: ANTHROPIC_API_KEY      # anthropic provider 를 켜려면 대시보드에서 비밀값으로 추가
+      #   sync: false
