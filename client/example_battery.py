@@ -9,7 +9,7 @@ client/example_battery.py — 예제 클라이언트: 전기차 배터리 충전
     python example_battery.py --one-shot                        # 1회 호출로 형식화+검사 (확인 단계 없음)
     python example_battery.py --spec specs/battery_spec.json    # 형식화 건너뛰고 검사만
     python example_battery.py --local                           # 서버 없이 ../server 의 formalizer·checker 직접 호출
-    python example_battery.py --validator https://validator-xxxx.onrender.com
+    python example_battery.py --validator https://validator-c6wn.onrender.com
 
 형식화(LLM, 틀릴 수 있는 곳)는 서버의 formalizer 가, 판정(z3, 틀리지 않는 곳)은 서버의 checker 가 한다.
 클라이언트는 원문을 들고 있다가 결과의 요구사항 ID 를 원문으로 되돌려 리포트를 만든다.  표준 라이브러리만 사용.
@@ -24,7 +24,7 @@ import urllib.error
 import urllib.request
 from typing import Any, Dict, List
 
-DEFAULT_URL = os.environ.get("VALIDATOR_URL", "https://validator.onrender.com")
+DEFAULT_URL = os.environ.get("VALIDATOR_URL", "https://validator-c6wn.onrender.com")
 
 # ---------------------------------------------------------------------------
 # 1. 자연어 요구사항 (입력)

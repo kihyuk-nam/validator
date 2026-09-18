@@ -2,7 +2,7 @@
 server/tests/test_api.py — validator 통합 테스트 (표준 라이브러리만).
 
     python tests/test_api.py http://localhost:8000
-    python tests/test_api.py https://validator-xxxx.onrender.com
+    python tests/test_api.py https://validator-c6wn.onrender.com
 
 검사 항목
   0. /healthz (절전 중이면 재시도) — checker 백엔드 z3 여부, formalizer providers

@@ -39,7 +39,7 @@ python example_battery.py --spec specs/battery_spec.json        # 검사만
 python compare_specs.py specs/battery_spec.json specs/claude_spec.json
 ```
 
-배포된 서버 주소는 `--validator URL` 또는 환경변수 `VALIDATOR_URL`. 기본값 `https://validator.onrender.com` — Render 가 접미사를 붙이면(`validator-xxxx.onrender.com`) 그 주소로 바꾼다.
+배포된 서버 주소는 `--validator URL` 또는 환경변수 `VALIDATOR_URL`. 기본값은 현재 배포된 `https://validator-c6wn.onrender.com` — 서버를 옮기면 두 클라이언트의 기본값만 바꾸면 된다.
 
 ## API 요약 (전체는 `server/README.md`)
 
@@ -53,7 +53,7 @@ python compare_specs.py specs/battery_spec.json specs/claude_spec.json
 
 ## 배포 (Render, 무료)
 
-GitHub 저장소로 push → render.com "New → Blueprint" → 저장소 선택(`render.yaml` 자동 인식, 서비스명 `validator`) → 빌드 2~5분 → `https://validator[-xxxx].onrender.com/healthz`. `anthropic` provider 를 켜려면 대시보드 Environment 에 `ANTHROPIC_API_KEY` 추가. 무료 인스턴스는 15분 미사용 시 절전(첫 호출 ~1분), URL 공개·인증 없음 — 실제 대외비 명세는 사내 Docker 로.
+GitHub 저장소로 push → render.com "New → Blueprint" → 저장소 선택(`render.yaml` 자동 인식, 서비스명 `validator`) → 빌드 2~5분 → `/healthz` 확인. 현재 배포된 주소는 `https://validator-c6wn.onrender.com` 이다. `anthropic` provider 를 켜려면 대시보드 Environment 에 `ANTHROPIC_API_KEY` 추가. 무료 인스턴스는 15분 미사용 시 절전(첫 호출 ~1분), URL 공개·인증 없음 — 실제 대외비 명세는 사내 Docker 로.
 
 ## 예제 요구사항과 기대 결과
 

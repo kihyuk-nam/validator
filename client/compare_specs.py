@@ -2,7 +2,7 @@
 compare_specs.py — 두 형식화 결과(명세 JSON)를 validator API(checker)만으로 비교한다.  단계 B(형식화 신뢰성)의 최소 형태.
 
     python compare_specs.py specs/battery_spec.json specs/claude_spec.json
-    python compare_specs.py A.json B.json --validator https://validator-xxxx.onrender.com
+    python compare_specs.py A.json B.json --validator https://validator-c6wn.onrender.com
 
 ① 요구사항별 문자열 비교(구문)
 ② 요구사항별 SMT 동치(의미): 서버의 전역 일관성 검사를 이용 —
@@ -29,7 +29,7 @@ def formula(r):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("a"); ap.add_argument("b")
-    ap.add_argument("--validator", default=os.environ.get("VALIDATOR_URL", "https://validator.onrender.com"))
+    ap.add_argument("--validator", default=os.environ.get("VALIDATOR_URL", "https://validator-c6wn.onrender.com"))
     a = ap.parse_args()
     A, B = (json.load(open(p, encoding="utf-8")) for p in (a.a, a.b))
     ra = {r["id"]: r for r in A["requirements"]}

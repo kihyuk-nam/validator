@@ -90,7 +90,7 @@ GET  /                 → 도움말 (텍스트)
 ## 3. 호출 예
 
 ```bash
-URL=https://validator-xxxx.onrender.com
+URL=https://validator-c6wn.onrender.com
 curl -s $URL/healthz
 curl -s -X POST "$URL/validate?smt2=0" -H "content-type: application/json" --data @examples/battery_input.json | python -m json.tool   # 자연어 모드
 curl -s -X POST "$URL/validate?smt2=0" -H "content-type: application/json" --data "{\"spec\": $(cat examples/battery_spec.json)}"             # 명세 모드
@@ -126,7 +126,7 @@ docker build -t validator . && docker run -p 8000:7860 validator
 | Cloudflare Workers | Pyodide(WASM) — z3 네이티브 확장 불가, 무료 CPU 10 ms/호출 | 부적합 |
 | Fly.io | 신규 계정 무료 티어 없음(7일 체험 후 유료) | 무료 조건에서 제외 |
 
-Render 절차: 저장소(validator) 루트를 GitHub 에 push → render.com "New → Blueprint" → 저장소 선택(루트의 `render.yaml`: name validator, rootDir server) → 2~5분 빌드 → `https://validator[-xxxx].onrender.com/healthz` 확인 → `python tests/test_api.py <URL>`.
+Render 절차: 저장소(validator) 루트를 GitHub 에 push → render.com "New → Blueprint" → 저장소 선택(루트의 `render.yaml`: name validator, rootDir server) → 2~5분 빌드 → `/healthz` 확인 → `python tests/test_api.py <URL>`. 현재 배포된 주소는 `https://validator-c6wn.onrender.com`.
 실제 대외비 명세는 사내 Docker 권장 — 코드 동일.
 
 ## 5. 주의
